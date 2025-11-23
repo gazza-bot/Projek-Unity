@@ -35,7 +35,7 @@ public class Movements : MonoBehaviour
         // Isi kode disini
         // untuk mendeteksi
         // method untuk detect tabrakan
-        if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet"))
+        if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet") || other.CompareTag("Asteroids"))
         {
             //kondisi kalah
             Time.timeScale = 0; // ngefreeze gaenya( semuanya jadi diem)

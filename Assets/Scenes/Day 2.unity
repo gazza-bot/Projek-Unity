@@ -826,7 +826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 3591554431738028579, guid: feef0e00e9b95ec49883d51113158c78, type: 3}
-  SpawnInterval: 1
+  AsteroidsPrefab: {fileID: 6268262047442833200, guid: 43b9d29a928189646b3cdf518387618f, type: 3}
+  SpawnInterval: 2
   spawnBoundaryY: 4
   spawnBoundaryX: 9
 --- !u!4 &2015436347
