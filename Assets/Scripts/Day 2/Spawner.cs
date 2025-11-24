@@ -5,8 +5,11 @@ public class Spawner : MonoBehaviour
     public GameObject EnemyPrefab;
     public GameObject AsteroidsPrefab;
     public float SpawnInterval = 3f;
+    private const float HardDifficultTime = 60f;
+    private const float MediumDifficultTime = 30f;
+    private bool HardApplied = false;
+    private bool MediumApplied = false;
     private float SinceLastSpawn; // sebagai counter untuk spawner
-    private float SpawnNewWave;
     private float TimeDifficult;
     public float spawnBoundaryY;
     public float spawnBoundaryX;
@@ -16,21 +19,41 @@ public class Spawner : MonoBehaviour
         TimeDifficult += Time.deltaTime;
         // Debug.Log(TimeDifficult + " : detik" );
         SinceLastSpawn += Time.deltaTime;
-        SpawnNewWave += Time.deltaTime;
-        if(SinceLastSpawn >= SpawnInterval)
+        UpdateSpawnInterval();
+        TrySpawn();
+    }
+    void UpdateSpawnInterval()
+    {
+        if(TimeDifficult >= HardDifficultTime && !HardApplied)
         {
-            if(TimeDifficult >= 30f)
-            {
-                SpawnAsteroids();
-                if(SpawnNewWave >= SpawnInterval - 1f)
-                {
-                    SpawnEnemy();
-                    SpawnNewWave = 0f;
-                }
-            }
-            SpawnEnemy();
-            SinceLastSpawn = 0f;
+            SpawnInterval /= 3f;
         }
+        else if(TimeDifficult >= MediumDifficultTime && !MediumApplied)
+        {
+            SpawnInterval /= 2f;
+        }
+    }
+
+    void TrySpawn()
+    {
+        if(SinceLastSpawn < SpawnInterval) return;
+
+        if(TimeDifficult >= HardDifficultTime)
+        {
+            SpawnEnemy();
+            SpawnAsteroids();
+        }
+        else if(TimeDifficult >= MediumDifficultTime)
+        {
+            SpawnEnemy();
+            SpawnAsteroids();
+        }
+        else
+        {
+            SpawnEnemy();
+        }
+
+        SinceLastSpawn = 0f;
     }
     void SpawnEnemy()
     {
