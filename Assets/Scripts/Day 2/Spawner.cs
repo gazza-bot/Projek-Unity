@@ -4,7 +4,9 @@ public class Spawner : MonoBehaviour
 {
     public GameObject EnemyPrefab;
     public GameObject AsteroidsPrefab;
-    public float SpawnInterval = 3f;
+    public float SpawnInterval = 4f;
+    public float MediumSpawnInterval = 3f;
+    public float HardSpawnInterval = 1.5f;
     private const float HardDifficultTime = 60f;
     private const float MediumDifficultTime = 30f;
     private bool HardApplied = false;
@@ -26,11 +28,11 @@ public class Spawner : MonoBehaviour
     {
         if(TimeDifficult >= HardDifficultTime && !HardApplied)
         {
-            SpawnInterval /= 3f;
+            SpawnInterval = HardSpawnInterval;
         }
         else if(TimeDifficult >= MediumDifficultTime && !MediumApplied)
         {
-            SpawnInterval /= 2f;
+            SpawnInterval = MediumSpawnInterval;
         }
     }
 
